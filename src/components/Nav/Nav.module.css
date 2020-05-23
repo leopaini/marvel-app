@@ -1,0 +1,32 @@
+.logo {
+  height: 45px;
+  cursor: pointer;
+  position: relative;
+}
+
+.search {
+  display: flex;
+  padding-left: 2em;
+  position: relative;
+  align-items: center;
+}
+
+.search i {
+  opacity: 1;
+  left: 1.5em;
+  color: #A8A8A8;
+  font-size: 1.25em;
+  position: absolute;
+  transition: opacity ease 250ms;
+}
+
+.search::before {
+  left: 0;
+  width: 2px;
+  content: "";
+  height: 40px;
+  margin-left: 1em;
+  position: absolute;
+  background: #eee;
+  border-radius: 50em;
+}
