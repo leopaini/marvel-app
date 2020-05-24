@@ -30,3 +30,19 @@
   background: #eee;
   border-radius: 50em;
 }
+
+.navActions {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+}
+
+.icon {
+  position: relative;
+}
+
+.icon i:hover+.tooltip {
+  z-index: 0;
+  opacity: .9;
+  transform: translateY(1.75em);
+}

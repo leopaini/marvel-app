@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { INavProps } from "../../interfaces";
 import { ReactComponent as Logo } from "../../img/logo.svg";
 
+// Axios
+import { fetchData } from "../../api";
+
 // Styled Components
-import { NavBar, Input } from "./styles";
 import { ThemeContext } from "styled-components";
+import { NavBar, Input, Icon, Vr, Tooltip } from "./styles";
 import { themeLight, themeDark, ThemeType } from "../../theme";
 
 // Style modules
@@ -12,6 +15,7 @@ import styles from "./Nav.module.css";
 
 const Nav: React.SFC<INavProps> = props => {
   const { setTheme } = props;
+  const [search, setSearch] = useState("");
   const themeContext = useContext(ThemeContext);
 
   const handleClick = (): void => {
@@ -19,19 +23,40 @@ const Nav: React.SFC<INavProps> = props => {
     else setTheme(themeLight);
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const results = await fetchData(search);
+    console.log(results);
+  };
+
   return (
     <NavBar>
       <Logo className={styles.logo} />
-      <span className={styles.search}>
-        {/* <input type="text" placeholder="Search" /> */}
-        <Input placeholder="Search" />
-        <i className="fas fa-search"></i>
-      </span>
 
-      <span className={styles.navActions}>
-        <i className="far fa-star"></i>
-        <button onClick={handleClick}>change theme</button>
-      </span>
+      <form onSubmit={handleSubmit}>
+        <span className={styles.search}>
+          <Input
+            value={search}
+            placeholder="Search"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearch(e.target.value)
+            }
+          />
+          <i className="fas fa-search"></i>
+        </span>
+      </form>
+
+      <div className={styles.navActions}>
+        <span className={styles.icon}>
+          <Icon className="far fa-star" />
+          <Tooltip className={styles.tooltip}>Go to Favorites</Tooltip>
+        </span>
+        <Vr />
+        <span className={styles.icon}>
+          <Icon className="fas fa-cog" onClick={handleClick} />
+          <Tooltip className={styles.tooltip}>Change the Theme</Tooltip>
+        </span>
+      </div>
     </NavBar>
   );
 };

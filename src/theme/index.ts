@@ -12,6 +12,10 @@ export interface Theme extends DefaultTheme {
     font: string;
     navbar: string;
     background: string;
+    tooltip: {
+      background: string;
+      font: string;
+    };
   };
   font: {
     size: string;
@@ -24,7 +28,11 @@ export const themeLight: Theme = {
     icon: "#A8A8A8",
     font: "#505050",
     navbar: "#ffffff",
-    background: "#F7F8FA"
+    background: "#F7F8FA",
+    tooltip: {
+      background: "#202020",
+      font: "#ffffff"
+    }
   },
   font: {
     size: "1.25rem"
@@ -37,7 +45,11 @@ export const themeDark: Theme = {
     icon: "#ffffff",
     font: "#ffffff",
     navbar: "#202020",
-    background: "#"
+    background: "#",
+    tooltip: {
+      background: "#ffffff",
+      font: "#202020"
+    }
   },
   font: { ...themeLight.font }
 };
