@@ -1,0 +1,117 @@
+.loader {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.spinner p {
+  font-size: 1.5rem;
+}
+
+@keyframes interwind-r {
+
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8)
+  }
+
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1)
+  }
+
+  0% {
+    transform: rotate(0deg)
+  }
+
+  50% {
+    transform: rotate(180deg)
+  }
+
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes interwind-s {
+
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8)
+  }
+
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1)
+  }
+
+  0% {
+    transform: translate(-15px, -15px) scale(0)
+  }
+
+  50% {
+    transform: translate(-15px, -15px) scale(1)
+  }
+
+  100% {
+    transform: translate(-15px, -15px) scale(0)
+  }
+}
+
+.interwind>div {
+  transform: translate(0px, -7.5px)
+}
+
+.interwind>div>div {
+  animation: interwind-r 1s linear infinite;
+  transform-origin: 50px 50px;
+}
+
+.interwind>div>div>div {
+  position: absolute;
+  transform: translate(50px, 41px);
+}
+
+.interwind>div>div>div>div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #202020;
+  animation: interwind-s 1s linear infinite;
+}
+
+.interwind>div>div:last-child {
+  animation-delay: -0.5s;
+}
+
+.interwind>div>div:last-child>div>div {
+  animation-delay: -0.5s;
+  background: #e62429;
+}
+
+.loadingSpinner {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.interwind {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+  /* see note above */
+}
+
+.interwind div {
+  box-sizing: content-box;
+}

@@ -37,12 +37,15 @@
   align-items: center;
 }
 
-.icon {
+.iconContent {
   position: relative;
 }
 
-.icon i:hover+.tooltip {
-  z-index: 0;
+.iconContent .icon {
+  z-index: 10;
+}
+
+.icon:hover+.tooltip {
   opacity: .9;
   transform: translateY(1.75em);
 }

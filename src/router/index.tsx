@@ -1,21 +1,23 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { useState } from "react";
 import { IRouterProps } from "../interfaces";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+// Store Provider
+import { StoreProvider } from "../store";
 
 // Styled Components
 import { themeLight } from "../theme";
 import { ThemeProvider } from "styled-components";
 
 // Components
-const Home = lazy(() => import("../components/Home"));
-const Nav = lazy(() => import("../components/Nav"));
+import { Home, Nav } from "../components";
 
 const Router: React.SFC<IRouterProps> = () => {
   const [theme, setTheme] = useState(themeLight);
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<h1>Cargando...</h1>}>
+    <StoreProvider>
+      <BrowserRouter>
         <ThemeProvider theme={theme}>
           <Nav setTheme={setTheme} />
           <Switch>
@@ -24,8 +26,8 @@ const Router: React.SFC<IRouterProps> = () => {
             <Route path="/signup" component={SignUp} /> */}
           </Switch>
         </ThemeProvider>
-      </Suspense>
-    </BrowserRouter>
+      </BrowserRouter>
+    </StoreProvider>
   );
 };
 

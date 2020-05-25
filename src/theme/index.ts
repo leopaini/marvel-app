@@ -1,26 +1,4 @@
-import { DefaultTheme } from "styled-components";
-
-export enum ThemeType {
-  dark,
-  light
-}
-
-export interface Theme extends DefaultTheme {
-  id: ThemeType;
-  color: {
-    icon: string;
-    font: string;
-    navbar: string;
-    background: string;
-    tooltip: {
-      background: string;
-      font: string;
-    };
-  };
-  font: {
-    size: string;
-  };
-}
+import { Theme, ThemeType } from "../interfaces";
 
 export const themeLight: Theme = {
   id: ThemeType.light,
@@ -32,7 +10,13 @@ export const themeLight: Theme = {
     tooltip: {
       background: "#202020",
       font: "#ffffff"
-    }
+    },
+    card: {
+      font: "#ffffff",
+      effect: "#e62429",
+      background: "#202020"
+    },
+    message: "#202020"
   },
   font: {
     size: "1.25rem"
@@ -45,22 +29,17 @@ export const themeDark: Theme = {
     icon: "#ffffff",
     font: "#ffffff",
     navbar: "#202020",
-    background: "#",
+    background: "#333333",
     tooltip: {
       background: "#ffffff",
       font: "#202020"
-    }
+    },
+    card: {
+      font: "#202020",
+      effect: "#e62429",
+      background: "#F7F8FA"
+    },
+    message: "#ffffff"
   },
   font: { ...themeLight.font }
 };
-
-// ,
-//   font: {
-//     family: "",
-//     base: "",
-//     small: "",
-//     xsmall: "",
-//     large: "",
-//     xlarge: "",
-//     xxlarge: ""
-//   }

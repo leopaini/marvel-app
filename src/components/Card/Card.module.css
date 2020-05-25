@@ -1,0 +1,54 @@
+.card {
+  width: 256px;
+  height: 380px;
+  display: flex;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+}
+
+.card:hover .thumb .image {
+  transform: scale3d(1.05, 1.05, 1);
+}
+
+.card:hover .info::before {
+  transform: translateY(calc(100% - 4px));
+}
+
+.card:hover .info .name {
+  opacity: 1;
+}
+
+.card:nth-of-type(n+5) {
+  margin-top: 2em;
+}
+
+.image {
+  top: -1em;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  transition: transform linear 150ms;
+}
+
+.icon {
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding: .5rem;
+  font-size: 1.5em;
+  position: absolute;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color linear 200ms;
+}
+
+.icon:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.icon:hover+.tooltip {
+  opacity: .9;
+  transform: translateY(1.75em);
+}

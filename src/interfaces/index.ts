@@ -1,5 +1,5 @@
 import React from "react";
-import { Theme } from "../theme";
+import { DefaultTheme } from "styled-components";
 
 // Router
 export interface IRouterProps {}
@@ -10,6 +10,20 @@ export interface IHomeProps {}
 // Components
 export interface INavProps {
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+}
+
+export interface ICardProps {
+  item: ICharacter;
+}
+
+// Store
+export interface IState {
+  loading: boolean;
+  items: ICharacter[];
+}
+
+export interface IProviderProps {
+  children: React.ReactNode;
 }
 
 // Services API
@@ -73,4 +87,33 @@ export interface IThumbnail {
 export interface IUrl {
   type: string;
   url: string;
+}
+
+// Theme
+export enum ThemeType {
+  dark,
+  light
+}
+
+export interface Theme extends DefaultTheme {
+  id: ThemeType;
+  color: {
+    icon: string;
+    font: string;
+    navbar: string;
+    background: string;
+    tooltip: {
+      background: string;
+      font: string;
+    };
+    card: {
+      font: string;
+      effect: string;
+      background: string;
+    };
+    message: string;
+  };
+  font: {
+    size: string;
+  };
 }

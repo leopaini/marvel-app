@@ -23,14 +23,15 @@ export const fetchData = async (name: string): Promise<ICharacter[]> => {
   }
 };
 
-// export const fetchData = async (country?: string): Promise<IApiData> => {
-//   try {
-//     const customUrl = country ? `${url}/countries/${country}` : url;
-//     const response: IApiResponse = await axios.get(customUrl);
-//     const { confirmed, recovered, deaths, lastUpdate } = response.data;
+export const fetchRandom = async (): Promise<ICharacter[]> => {
+  try {
+    const random = Math.floor(Math.random() * 500);
+    const response: IResponse = await instance.get("characters", {
+      params: { limit: 1, offset: random, ts, apikey: publicKey, hash: hash.toString() }
+    });
 
-//     return { confirmed, recovered, deaths, lastUpdate };
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
+    return response.data.data.results;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
