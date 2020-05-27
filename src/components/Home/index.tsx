@@ -4,33 +4,31 @@ import { Card, Loading } from "../";
 import { IHomeProps, ICharacter } from "../../interfaces";
 
 // Styles
+import { Message } from "./styles";
 import styles from "./Home.module.css";
-import { Main, Message } from "./styles";
+import { Container } from "../../elements";
 
 const Home: React.SFC<IHomeProps> = () => {
-  const {
-    state: { loading, items }
-  } = useHome();
+  const { state } = useHome();
 
-  if (loading) return <Loading />;
-
+  if (state.loading) return <Loading />;
   return (
-    <Main className="container">
-      <h2 className={styles.subtitle}>{`${items.length} results`}</h2>
+    <Container className={styles.home}>
+      <h2 className={styles.subtitle}>{`${state.items.length} results`}</h2>
 
       <section className={styles.cards}>
-        {items.map((item: ICharacter) => (
+        {state.items.map((item: ICharacter) => (
           <Card item={item} key={item.id} />
         ))}
       </section>
 
-      {items.length === 0 && (
+      {state.items.length === 0 && (
         <span className={styles.noMatches}>
           <Message>No matches found!</Message>
           <Message>Sorry, nothing to see here</Message>
         </span>
       )}
-    </Main>
+    </Container>
   );
 };
 

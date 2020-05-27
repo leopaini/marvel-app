@@ -10,11 +10,13 @@ import { Tooltip } from "../../elements";
 import { NavBar, Input, Icon, Vr } from "./styles";
 
 const Nav: React.SFC<INavProps> = ({ setTheme }) => {
-  const { search, handleSubmit, handleChange, handleClick } = useNav(setTheme);
+  const { search, handleHome, handleSubmit, handleChange, handleClick } = useNav(
+    setTheme
+  );
 
   return (
     <NavBar>
-      <Logo className={styles.logo} />
+      <Logo className={styles.logo} onClick={handleHome} />
 
       <form className={styles.search} onSubmit={handleSubmit}>
         <Input value={search} placeholder="Search" onChange={handleChange} />

@@ -10,7 +10,7 @@ import { themeLight } from "../theme";
 import { ThemeProvider } from "styled-components";
 
 // Components
-import { Home, Nav } from "../components";
+import { Nav, Home, Comic } from "../components";
 
 const Router: React.SFC<IRouterProps> = () => {
   const [theme, setTheme] = useState(themeLight);
@@ -22,8 +22,8 @@ const Router: React.SFC<IRouterProps> = () => {
           <Nav setTheme={setTheme} />
           <Switch>
             <Route exact path="/" component={Home} />
-            {/* <Route path="/login" component={Login} />
-            <Route path="/signup" component={SignUp} /> */}
+            <Route path="/comic/:comicId" component={Comic} />
+            {/*<Route path="/signup" component={SignUp} /> */}
           </Switch>
         </ThemeProvider>
       </BrowserRouter>

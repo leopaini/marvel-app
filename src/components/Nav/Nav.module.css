@@ -5,6 +5,8 @@
 }
 
 .search {
+  z-index: 12;
+  flex-grow: 1;
   display: flex;
   padding-left: 2em;
   position: relative;

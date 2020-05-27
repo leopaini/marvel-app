@@ -17,6 +17,7 @@ export const NavBar = styled.nav`
 
 export const Input = styled.input`
   all: unset;
+  width: 100%;
   margin-left: 1em;
   font-size: 1.25em;
   padding-left: 0.5em;

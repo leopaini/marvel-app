@@ -1,3 +1,9 @@
+.home {
+  min-height: 100vh;
+  padding: 5em 4.5em;
+  box-sizing: border-box;
+}
+
 .subtitle {
   color: #999;
   font-size: 1rem;

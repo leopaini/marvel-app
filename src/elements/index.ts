@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const Container = styled.main`
+  margin: 0 auto;
+  max-width: 1280px;
+  transition: background-color linear 150ms;
+  background-color: ${props => props.theme.color.background};
+`;
+
 export const Tooltip = styled.span`
   top: 15px;
   z-index: 9;

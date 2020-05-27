@@ -1,0 +1,49 @@
+.comic {
+  display: grid;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 8em 4.5em 4.5em;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "contentImg description";
+}
+
+.contentImg {
+  grid-area: contentImg;
+}
+
+.contentImg img {
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.listMenu {
+  margin: 0;
+  columns: 2;
+  list-style: none;
+  padding: 2em 0 0 0;
+}
+
+.listItem {
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+.listItem:not(:first-child) {
+  padding-top: 1em;
+}
+
+.listItem span {
+  display: block;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.description {
+  font-weight: 500;
+  padding-top: 2em;
+  font-size: 1.125rem;
+}

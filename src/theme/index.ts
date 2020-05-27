@@ -16,7 +16,10 @@ export const themeLight: Theme = {
       effect: "#e62429",
       background: "#202020"
     },
-    message: "#202020"
+    message: "#202020",
+    comic: {
+      font: "#3E3E3E"
+    }
   },
   font: {
     size: "1.25rem"
@@ -39,7 +42,10 @@ export const themeDark: Theme = {
       effect: "#e62429",
       background: "#F7F8FA"
     },
-    message: "#ffffff"
+    message: "#ffffff",
+    comic: {
+      font: "#F7F8FA"
+    }
   },
   font: { ...themeLight.font }
 };
