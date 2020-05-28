@@ -10,11 +10,16 @@ export interface IComicProps {}
 
 // Components
 export interface INavProps {
-  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  setTheme: (theme: Theme) => void;
 }
 
 export interface ICardProps {
-  item: ICharacter;
+  item: ICharacter | IComic;
+}
+
+export interface IModalProps {
+  item: ICharacter | IComic;
+  closeModal: () => void;
 }
 
 // Store
@@ -22,6 +27,8 @@ export interface IState {
   loading: boolean;
   items: ICharacter[];
   comics: IComicArray;
+  favorites: IIndexItem;
+  results: number | undefined;
 }
 
 export interface IProviderProps {
@@ -56,7 +63,11 @@ export interface IData<T> {
 }
 
 export interface IComicArray {
-  [index: string]: IComic;
+  [position: string]: IComic[];
+}
+
+export interface IIndexItem {
+  [position: string]: IComic | ICharacter;
 }
 
 export interface IComic {

@@ -1,6 +1,9 @@
 import React from "react";
 import cx from "classnames";
-import { IThumbnail, ICardProps } from "../../interfaces";
+import Modal from "../Modal";
+import useCard from "./useCard";
+import { isCharacter } from "../../helpers";
+import { ICardProps } from "../../interfaces";
 
 // Styles
 import styles from "./Card.module.css";
@@ -8,22 +11,50 @@ import { Tooltip } from "../../elements";
 import { Thumb, Info, Name } from "./styles";
 
 const Card: React.SFC<ICardProps> = ({ item }) => {
-  const getImgPath = (thumbnail: IThumbnail): string => {
-    return `${thumbnail.path}/portrait_fantastic.${thumbnail.extension}`;
-  };
+  const {
+    open,
+    fav,
+    handleFav,
+    getImgPath,
+    handleOpen,
+    handleClose,
+    handleRemoveFav
+  } = useCard(item);
 
   return (
-    <div className={styles.card}>
-      <Thumb className={styles.thumb}>
-        <i className={cx(styles.icon, "far fa-star")}></i>
-        <Tooltip className={styles.tooltip}>Add to favorites</Tooltip>
+    <>
+      {open && <Modal item={item} closeModal={handleClose} />}
 
-        <img className={styles.image} src={getImgPath(item.thumbnail)} alt={item.name} />
-      </Thumb>
-      <Info className={styles.info}>
-        <Name className={styles.name}>{item.name}</Name>
-      </Info>
-    </div>
+      <div className={styles.card} onClick={handleOpen}>
+        <Thumb className={styles.thumb}>
+          <>
+            {fav ? (
+              <i
+                className={cx(styles.icon, "fas fa-star")}
+                onClick={e => handleRemoveFav(e)}></i>
+            ) : (
+              <i
+                className={cx(styles.icon, "far fa-star")}
+                onClick={e => handleFav(e)}></i>
+            )}
+            <Tooltip className={styles.tooltip}>
+              {fav ? "Remove from favorites" : "Add to favorites"}
+            </Tooltip>
+          </>
+
+          <img
+            className={styles.image}
+            src={getImgPath(item.thumbnail)}
+            alt={isCharacter(item) ? item.name : item.title}
+          />
+        </Thumb>
+        <Info className={styles.info}>
+          <Name className={styles.name}>
+            {isCharacter(item) ? item.name : item.title}
+          </Name>
+        </Info>
+      </div>
+    </>
   );
 };
 

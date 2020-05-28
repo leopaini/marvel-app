@@ -1,0 +1,165 @@
+.container {
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  margin: 0 !important;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal {
+  height: 0;
+  width: 0;
+  opacity: 0;
+  display: flex;
+  padding: 1.5em;
+  color: #3e3e3e;
+  background: #fff;
+  border-radius: .5em;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  transition: opacity linear 250ms;
+}
+
+.modal.open {
+  opacity: 1;
+  width: 50vw;
+  height: 50vh;
+}
+
+.header {
+  display: flex;
+  margin-bottom: 2em;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.header i {
+  padding: .5rem;
+  cursor: pointer;
+  font-size: 1.75rem;
+  background-color: transparent;
+}
+
+.header i:hover {
+  opacity: .8;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  overflow: scroll;
+  flex-direction: column;
+}
+
+.listMenu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  display: flex;
+  padding-bottom: 1em;
+}
+
+.thumb {
+  margin-right: 1em;
+}
+
+.info {
+  font-size: 1em;
+}
+
+.info .title {
+  margin: 0;
+  font-weight: 600;
+  padding-bottom: 1em;
+}
+
+.info .description {
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.info .description::before {
+  right: 0;
+  bottom: 0;
+  content: "...";
+  position: absolute;
+}
+
+.notMatches {
+  padding-top: 3em;
+}
+
+.notMatches p {
+  margin: 0;
+  opacity: .5;
+  font-weight: 700;
+  line-height: 1.5;
+  font-size: 1.75rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.notMatches p:first-of-type {
+  opacity: .8;
+}
+
+
+.ldsRing {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.ldsRing div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.ldsRing div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.ldsRing div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.ldsRing div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes ldsRing {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

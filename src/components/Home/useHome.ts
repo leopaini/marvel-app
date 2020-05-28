@@ -1,16 +1,16 @@
+import api from "../../api";
 import { useStore } from "../../store";
 import { useLocation } from "react-router";
 import { ICharacter } from "../../interfaces";
 import { useCallback, useEffect } from "react";
-import { fetchData, fetchRandom } from "../../api";
 
 const useHome = () => {
   const [state, dispatch] = useStore();
-
-  // Search Params
   const params = new URLSearchParams(useLocation().search);
+
+  // Params
   const character = params.get("character");
-  const comics = params.get("comic");
+  //const comics = params.get("comic");
 
   const setLoading = useCallback(
     (loading: boolean) => {
@@ -27,17 +27,18 @@ const useHome = () => {
   );
 
   useEffect(() => {
-    // TODO comics..
     if (character) {
-      fetchData(character)
+      api
+        .getCharactersByName(character)
         .then((results: ICharacter[]) => setItems(results))
         .finally(() => setLoading(false));
-    } else {
-      fetchRandom()
+    } else if (state.results === undefined) {
+      api
+        .getRandomCharacter()
         .then((results: ICharacter[]) => setItems(results))
         .finally(() => setLoading(false));
     }
-  }, [character, comics, setItems, setLoading]);
+  }, [character, setItems, setLoading, state.results]);
 
   return {
     state

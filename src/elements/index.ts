@@ -29,3 +29,18 @@ export const Tooltip = styled.span`
     pointer-events: none;
   }
 `;
+
+export const Message = styled.p`
+  margin: 0;
+  font-size: 2em;
+  line-height: 1.5;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: ${props => props.theme.color.message};
+  transition: color linear 150ms;
+
+  strong {
+    font-weight: 900;
+    color: ${props => props.theme.color.font};
+  }
+`;

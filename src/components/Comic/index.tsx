@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "../../store";
 import { useParams } from "react-router";
 import { getComicById } from "../../api";
 import { IComicProps, IComic, IThumbnail, ICreatorItem } from "../../interfaces";
@@ -10,27 +9,23 @@ import styles from "./Comic.module.css";
 import { Container } from "../../elements";
 
 const Comic: React.SFC<IComicProps> = () => {
-  const state = useState();
   const { comicId } = useParams();
   const [comic, setComic] = React.useState<IComic | undefined>();
 
   React.useEffect(() => {
     if (comicId) {
-      if (state.comics[comicId]) setComic(state.comics[comicId]);
-      else
-        getComicById(comicId).then((results: IComic[]) => {
-          const result = results[0];
-          console.log(result);
-          // Guardar en state.
-          setComic(result);
-        });
+      getComicById(comicId).then((results: IComic[]) => {
+        const result = results[0];
+        setComic(result);
+      });
     }
-  }, [comicId, state.comics]);
+  }, [comicId]);
 
   const getPath = (thumb: IThumbnail): string => {
     return `${thumb.path}.${thumb.extension}`;
   };
 
+  // TODO: Loading page
   if (!comic) return null;
 
   const published = comic.dates.find(el => el.type === "onsaleDate");

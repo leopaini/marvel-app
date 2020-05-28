@@ -4,9 +4,8 @@ import { Card, Loading } from "../";
 import { IHomeProps, ICharacter } from "../../interfaces";
 
 // Styles
-import { Message } from "./styles";
 import styles from "./Home.module.css";
-import { Container } from "../../elements";
+import { Container, Message } from "../../elements";
 
 const Home: React.SFC<IHomeProps> = () => {
   const { state } = useHome();

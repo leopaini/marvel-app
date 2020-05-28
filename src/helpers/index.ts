@@ -1,3 +1,5 @@
+import { ICharacter, IComic } from "../interfaces";
+
 export const decodeUrl = (params: string): void => {
   const comicsParams = decodeURIComponent(params).split("|");
   // TODO: Ver donde guardo las demás...
@@ -10,3 +12,15 @@ export const decodeUrl = (params: string): void => {
   console.log(year.replace("(", "").replace(")", ""));
   console.log(issueNr.replace("#", ""));
 };
+
+export const hideScroll = (): void => {
+  document.body.style.overflow = "hidden";
+};
+
+export const showScroll = (): void => {
+  document.body.style.overflow = "unset";
+};
+
+export function isCharacter(item: ICharacter | IComic): item is ICharacter {
+  return (item as ICharacter).name !== undefined;
+}

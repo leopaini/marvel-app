@@ -1,19 +1,27 @@
-import React from "react";
-import { fetchData } from "../../api";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch } from "../../store";
-import { useHistory } from "react-router";
+import { getCharactersByName } from "../../api";
 import { ThemeContext } from "styled-components";
 import { themeLight, themeDark } from "../../theme";
-import { ICharacter, Theme, ThemeType } from "../../interfaces";
+import { useHistory, useLocation } from "react-router";
+import { ICharacter, IIndexItem, Theme, ThemeType } from "../../interfaces";
 
-const useNav = (setTheme: React.Dispatch<React.SetStateAction<Theme>>) => {
+type ThemeAction = (theme: Theme) => void;
+
+const useNav = (setTheme: ThemeAction) => {
   const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const [search, setSearch] = React.useState("");
   const themeContext = React.useContext(ThemeContext);
+  const favPage = location.pathname === "/favorites";
 
   const handleHome = (): void => {
     history.push("/");
+  };
+
+  const handleFav = (): void => {
+    history.push("/favorites");
   };
 
   const handleClick = (): void => {
@@ -29,6 +37,10 @@ const useNav = (setTheme: React.Dispatch<React.SetStateAction<Theme>>) => {
     e.preventDefault();
     setLoading(true);
 
+    if (location.pathname !== "/") {
+      history.push("/");
+    }
+
     // Case of search with direct link from marvel
     if (search.includes("http") && search.includes("comics")) {
       const comicId = parseInt(search.split("/")[5]);
@@ -36,28 +48,45 @@ const useNav = (setTheme: React.Dispatch<React.SetStateAction<Theme>>) => {
         history.push(`/comic/${comicId}`);
       }
     } else
-      fetchData(search)
+      getCharactersByName(search)
         .then((results: ICharacter[]) => setItems(results))
         .finally(() => setLoading(false));
   };
 
   // Dispatch actions
-  const setLoading = (loading: boolean): void => {
-    dispatch({
-      type: "SET_LOADING",
-      payload: { loading }
-    });
-  };
+  const setLoading = useCallback(
+    (loading: boolean): void => {
+      dispatch({ type: "SET_LOADING", payload: { loading } });
+    },
+    [dispatch]
+  );
 
-  const setItems = (items: ICharacter[]): void => {
-    dispatch({
-      type: "ADD_ITEMS",
-      payload: { items }
-    });
-  };
+  const setItems = useCallback(
+    (items: ICharacter[]): void => {
+      dispatch({ type: "ADD_ITEMS", payload: { items } });
+    },
+    [dispatch]
+  );
+
+  const setFavs = useCallback(
+    (items: IIndexItem) => {
+      dispatch({ type: "ADD_FAVS_FROM_LS", payload: { items } });
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    const favorites = localStorage.getItem("favorites");
+    if (favorites) {
+      const favs = JSON.parse(favorites);
+      setFavs(favs);
+    }
+  }, [setFavs]);
 
   return {
     search,
+    favPage,
+    handleFav,
     handleHome,
     handleClick,
     handleChange,

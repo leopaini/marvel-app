@@ -10,9 +10,15 @@ import { Tooltip } from "../../elements";
 import { NavBar, Input, Icon, Vr } from "./styles";
 
 const Nav: React.SFC<INavProps> = ({ setTheme }) => {
-  const { search, handleHome, handleSubmit, handleChange, handleClick } = useNav(
-    setTheme
-  );
+  const {
+    search,
+    favPage,
+    handleFav,
+    handleHome,
+    handleSubmit,
+    handleChange,
+    handleClick
+  } = useNav(setTheme);
 
   return (
     <NavBar>
@@ -25,8 +31,11 @@ const Nav: React.SFC<INavProps> = ({ setTheme }) => {
 
       <div className={styles.navActions}>
         <span className={styles.iconContent}>
-          <Icon className={cx(styles.icon, "far fa-star")} />
-          <Tooltip className={styles.tooltip}>Go to Favorites</Tooltip>
+          <Icon
+            className={cx(styles.icon, favPage ? "fas fa-star" : "far fa-star")}
+            onClick={handleFav}
+          />
+          {!favPage && <Tooltip className={styles.tooltip}>Go to Favorites</Tooltip>}
         </span>
         <Vr />
         <span className={styles.iconContent}>

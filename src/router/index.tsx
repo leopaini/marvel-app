@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
+import useRouter from "./useRouter";
 import { IRouterProps } from "../interfaces";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 // Store Provider
 import { StoreProvider } from "../store";
 
 // Styled Components
-import { themeLight } from "../theme";
 import { ThemeProvider } from "styled-components";
 
 // Components
-import { Nav, Home, Comic } from "../components";
+import { Nav, Home, Comic, Favorites } from "../components";
 
 const Router: React.SFC<IRouterProps> = () => {
-  const [theme, setTheme] = useState(themeLight);
+  const { theme, handleTheme } = useRouter();
 
   return (
     <StoreProvider>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <Nav setTheme={setTheme} />
+          <Nav setTheme={handleTheme} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/comic/:comicId" component={Comic} />
-            {/*<Route path="/signup" component={SignUp} /> */}
+            <Route path="/favorites" component={Favorites} />
+            <Route path="/*">
+              <Redirect to="/" />
+            </Route>
           </Switch>
         </ThemeProvider>
       </BrowserRouter>
