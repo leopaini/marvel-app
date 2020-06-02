@@ -26,6 +26,7 @@ export const Thumb = styled.div`
 export const Info = styled.div`
   z-index: 1;
   height: 100%;
+  padding: 1em;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
@@ -33,6 +34,7 @@ export const Info = styled.div`
   background-color: ${props => props.theme.color.card.background};
 
   &::before {
+    left: 0;
     z-index: -1;
     content: "";
     width: 100%;
@@ -59,7 +61,6 @@ export const Info = styled.div`
 
 export const Name = styled.p`
   margin: 0;
-  padding: 1em;
   opacity: 0.8;
   font-weight: 700;
   font-size: 1.25rem;

@@ -44,3 +44,7 @@ export const Message = styled.p`
     color: ${props => props.theme.color.font};
   }
 `;
+
+export const Paragraph = styled.p`
+  color: ${props => props.theme.color.message};
+`;

@@ -1,20 +1,25 @@
 import React from "react";
-import { useStore } from "../../store";
+import { useHistory } from "react-router";
+import { useDispatch } from "../../store";
+import { isCharacter } from "../../helpers";
 import { showScroll, hideScroll } from "../../helpers";
 import { IThumbnail, ICharacter, IComic } from "../../interfaces";
 
 const useCard = (item: ICharacter | IComic) => {
-  const [state, dispatch] = useStore();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
-  const fav = state.favorites[item.id] ? true : false;
 
   const getImgPath = (thumbnail: IThumbnail): string => {
     return `${thumbnail.path}/portrait_fantastic.${thumbnail.extension}`;
   };
 
   const handleOpen = (): void => {
-    hideScroll();
-    setOpen(true);
+    if (!isCharacter(item)) history.push(`/comic/${item.id}`);
+    else {
+      hideScroll();
+      setOpen(true);
+    }
   };
 
   const handleClose = (): void => {
@@ -33,7 +38,6 @@ const useCard = (item: ICharacter | IComic) => {
   };
 
   return {
-    fav,
     open,
     handleFav,
     getImgPath,

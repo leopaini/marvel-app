@@ -7,6 +7,8 @@ export interface IRouterProps {}
 // Pages Components
 export interface IHomeProps {}
 export interface IComicProps {}
+export interface IFavoritesProps {}
+export interface ILoadingProps {}
 
 // Components
 export interface INavProps {
@@ -22,11 +24,16 @@ export interface IModalProps {
   closeModal: () => void;
 }
 
+export interface IStarProps {
+  item: ICharacter | IComic;
+}
+
 // Store
 export interface IState {
   loading: boolean;
   items: ICharacter[];
   comics: IComicArray;
+  filters: IFilter;
   favorites: IIndexItem;
   results: number | undefined;
 }
@@ -68,6 +75,15 @@ export interface IComicArray {
 
 export interface IIndexItem {
   [position: string]: IComic | ICharacter;
+}
+
+export interface IFilter {
+  [index: number]: IFilterContent;
+}
+
+export interface IFilterContent {
+  comics: IComic[];
+  filters: string[];
 }
 
 export interface IComic {

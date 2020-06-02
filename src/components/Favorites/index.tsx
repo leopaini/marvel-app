@@ -1,11 +1,11 @@
 import React from "react";
 import Card from "../Card";
 import { useState } from "../../store";
+import { IFavoritesProps } from "../../interfaces";
 
+// Styles
 import styles from "./Favorites.module.css";
 import { Container, Message } from "../../elements";
-
-export interface IFavoritesProps {}
 
 const Favorites: React.SFC<IFavoritesProps> = () => {
   const state = useState();

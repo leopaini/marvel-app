@@ -1,4 +1,5 @@
 import React from "react";
+import { Star } from "../";
 import cx from "classnames";
 import useModal from "./useModal";
 import { isCharacter } from "../../helpers";
@@ -8,9 +9,7 @@ import { IModalProps, IComic } from "../../interfaces";
 import styles from "./Modal.module.css";
 
 const Modal: React.SFC<IModalProps> = ({ item, closeModal }) => {
-  const { loading, state, getURLImg } = useModal(item);
-  const items = state.comics[item.id];
-  const modalClass = cx(styles.modal, items && !loading ? styles.open : "");
+  const { loading, items, modalClass, getURLImg, handleClick } = useModal(item);
 
   return (
     <section className={styles.container} onClick={closeModal}>
@@ -33,11 +32,18 @@ const Modal: React.SFC<IModalProps> = ({ item, closeModal }) => {
           <div className={styles.content}>
             <ul className={styles.listMenu}>
               {items.map((el: IComic) => (
-                <li key={el.id} className={styles.listItem}>
+                <li
+                  key={el.id}
+                  className={styles.listItem}
+                  onClick={() => handleClick(el.id)}>
                   <div className={styles.thumb}>
                     <img src={getURLImg(el.thumbnail)} alt={el.title} />
                   </div>
                   <div className={styles.info}>
+                    <span className={styles.icon}>
+                      <Star item={el} />
+                    </span>
+
                     <p className={styles.title}>{el.title}</p>
                     <p
                       className={styles.description}

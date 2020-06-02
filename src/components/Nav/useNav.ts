@@ -35,11 +35,9 @@ const useNav = (setTheme: ThemeAction) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setInitSearch();
+    if (location.pathname !== "/") history.push("/");
     setLoading(true);
-
-    if (location.pathname !== "/") {
-      history.push("/");
-    }
 
     // Case of search with direct link from marvel
     if (search.includes("http") && search.includes("comics")) {
@@ -60,6 +58,10 @@ const useNav = (setTheme: ThemeAction) => {
     },
     [dispatch]
   );
+
+  const setInitSearch = useCallback(() => {
+    dispatch({ type: "SET_SEARCH" });
+  }, [dispatch]);
 
   const setItems = useCallback(
     (items: ICharacter[]): void => {

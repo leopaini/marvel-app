@@ -70,8 +70,29 @@
 }
 
 .listItem {
+  padding: 1em;
   display: flex;
-  padding-bottom: 1em;
+  cursor: pointer;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.listItem:hover {
+  border-color: #ccc;
+}
+
+.listItem:hover>.thumb {
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.listItem:hover>.info .title {
+  text-decoration: underline;
+}
+
+.listItem:hover>.info .title,
+.listItem:hover>.info .description {
+  opacity: .8;
 }
 
 .thumb {
@@ -79,13 +100,24 @@
 }
 
 .info {
+  width: 100%;
   font-size: 1em;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.info .icon {
+  top: -.5em;
+  right: -.5em;
+  padding: .5em;
+  position: absolute;
 }
 
 .info .title {
   margin: 0;
   font-weight: 600;
   padding-bottom: 1em;
+  width: calc(100% - 3em);
 }
 
 .info .description {
@@ -94,13 +126,6 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-}
-
-.info .description::before {
-  right: 0;
-  bottom: 0;
-  content: "...";
-  position: absolute;
 }
 
 .notMatches {

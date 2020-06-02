@@ -2,6 +2,9 @@ import { ICharacter, IComic, IIndexItem } from "../interfaces";
 
 type Action =
   | {
+      type: "SET_SEARCH";
+    }
+  | {
       type: "ADD_ITEMS";
       payload: {
         items: ICharacter[];
@@ -36,6 +39,14 @@ type Action =
       type: "ADD_FAVS_FROM_LS";
       payload: {
         items: IIndexItem;
+      };
+    }
+  | {
+      type: "SET_FILTERS";
+      payload: {
+        comic: IComic;
+        filters: string[];
+        characterId: number;
       };
     };
 

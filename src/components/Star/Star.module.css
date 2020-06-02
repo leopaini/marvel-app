@@ -1,0 +1,19 @@
+.icon {
+  z-index: 10;
+  opacity: .6;
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: relative;
+  pointer-events: all;
+  background: transparent;
+  transition: opacity linear 200ms;
+}
+
+.icon:hover {
+  opacity: 1;
+}
+
+.icon:hover+.tooltip {
+  opacity: .9;
+  transform: translateY(1.75em);
+}

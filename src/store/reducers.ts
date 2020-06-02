@@ -1,5 +1,5 @@
 import Action from "./actions";
-import { IState } from "../interfaces";
+import { IState, IFilterContent } from "../interfaces";
 
 function reducers(state: IState, action: Action) {
   switch (action.type) {
@@ -39,6 +39,20 @@ function reducers(state: IState, action: Action) {
     case "ADD_FAVS_FROM_LS": {
       const favorites = { ...action.payload.items };
       return { ...state, favorites };
+    }
+
+    case "SET_FILTERS": {
+      const filters = { ...state.filters };
+      const filter: IFilterContent = {
+        filters: action.payload.filters,
+        comics: [action.payload.comic]
+      };
+      filters[action.payload.characterId] = filter;
+      return { ...state, filters };
+    }
+
+    case "SET_SEARCH": {
+      return { ...state, results: 0 };
     }
 
     default:

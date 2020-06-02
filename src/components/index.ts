@@ -3,5 +3,6 @@ export { default as Home } from "./Home";
 export { default as Card } from "./Card";
 export { default as Comic } from "./Comic";
 export { default as Modal } from "./Modal";
+export { default as Star } from "./Star";
 export { default as Loading } from "./Loading";
 export { default as Favorites } from "./Favorites";

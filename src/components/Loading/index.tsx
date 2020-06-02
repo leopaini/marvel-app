@@ -1,14 +1,13 @@
 import React from "react";
-import cx from "classnames";
+import { ILoadingProps } from "../../interfaces";
 
 // Styles
 import styles from "./Loading.module.css";
-
-export interface ILoadingProps {}
+import { Container, Paragraph } from "../../elements";
 
 const Loading: React.SFC<ILoadingProps> = () => {
   return (
-    <main className={cx(styles.loader, "container")}>
+    <Container className={styles.loader}>
       <div className={styles.spinner}>
         <div className={styles.loadingSpinner}>
           <div className={styles.interwind}>
@@ -27,9 +26,9 @@ const Loading: React.SFC<ILoadingProps> = () => {
           </div>
         </div>
 
-        <p>Loading...</p>
+        <Paragraph>Loading...</Paragraph>
       </div>
-    </main>
+    </Container>
   );
 };
 

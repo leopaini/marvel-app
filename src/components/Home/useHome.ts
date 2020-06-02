@@ -1,8 +1,9 @@
 import api from "../../api";
 import { useStore } from "../../store";
 import { useLocation } from "react-router";
-import { ICharacter } from "../../interfaces";
 import { useCallback, useEffect } from "react";
+import { processComicsParams } from "../../helpers";
+import { IComic, ICharacter } from "../../interfaces";
 
 const useHome = () => {
   const [state, dispatch] = useStore();
@@ -10,7 +11,7 @@ const useHome = () => {
 
   // Params
   const character = params.get("character");
-  //const comics = params.get("comic");
+  const comics = params.get("comic");
 
   const setLoading = useCallback(
     (loading: boolean) => {
@@ -26,13 +27,39 @@ const useHome = () => {
     [dispatch]
   );
 
+  const setFilters = useCallback(
+    (comic: IComic, filters: string[], characterId: number) => {
+      dispatch({ type: "SET_FILTERS", payload: { comic, filters, characterId } });
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     if (character) {
-      api
-        .getCharactersByName(character)
-        .then((results: ICharacter[]) => setItems(results))
-        .finally(() => setLoading(false));
-    } else if (state.results === undefined) {
+      if (comics) {
+        const { title, year, issueNumber, filters } = processComicsParams(comics);
+        api
+          .getComicByParams(title, year, issueNumber)
+          .then((comic: IComic) => {
+            api
+              .getCharacterByComicId(comic.id, character)
+              .then((results: ICharacter[]) => {
+                setFilters(comic, filters, results[0].id);
+                setItems(results);
+              })
+              .finally(() => setLoading(false));
+          })
+          .catch(() => setLoading(false));
+      } else
+        api
+          .getCharactersByName(character)
+          .then((results: ICharacter[]) => setItems(results))
+          .finally(() => setLoading(false));
+    }
+  }, [character, comics, setFilters, setItems, setLoading]);
+
+  useEffect(() => {
+    if (!character && state.results === undefined) {
       api
         .getRandomCharacter()
         .then((results: ICharacter[]) => setItems(results))

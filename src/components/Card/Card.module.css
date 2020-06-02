@@ -24,31 +24,30 @@
   margin-top: 2em;
 }
 
-.image {
-  top: -1em;
-  width: 100%;
-  z-index: 1;
-  position: absolute;
-  transition: transform linear 150ms;
+.card.comic {
+  pointer-events: none;
 }
 
 .icon {
   top: 0;
   right: 0;
   z-index: 10;
+  color: #fff;
   padding: .5rem;
-  font-size: 1.5em;
   position: absolute;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.7);
-  transition: color linear 200ms;
 }
 
-.icon:hover {
-  color: rgba(255, 255, 255, 1);
+.name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
-.icon:hover+.tooltip {
-  opacity: .9;
-  transform: translateY(1.75em);
+.image {
+  top: -1em;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  transition: transform linear 150ms;
 }

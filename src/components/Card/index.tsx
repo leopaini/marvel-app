@@ -1,25 +1,15 @@
 import React from "react";
-import cx from "classnames";
-import Modal from "../Modal";
 import useCard from "./useCard";
+import { Star, Modal } from "../";
 import { isCharacter } from "../../helpers";
 import { ICardProps } from "../../interfaces";
 
 // Styles
 import styles from "./Card.module.css";
-import { Tooltip } from "../../elements";
 import { Thumb, Info, Name } from "./styles";
 
 const Card: React.SFC<ICardProps> = ({ item }) => {
-  const {
-    open,
-    fav,
-    handleFav,
-    getImgPath,
-    handleOpen,
-    handleClose,
-    handleRemoveFav
-  } = useCard(item);
+  const { open, getImgPath, handleOpen, handleClose } = useCard(item);
 
   return (
     <>
@@ -27,20 +17,9 @@ const Card: React.SFC<ICardProps> = ({ item }) => {
 
       <div className={styles.card} onClick={handleOpen}>
         <Thumb className={styles.thumb}>
-          <>
-            {fav ? (
-              <i
-                className={cx(styles.icon, "fas fa-star")}
-                onClick={e => handleRemoveFav(e)}></i>
-            ) : (
-              <i
-                className={cx(styles.icon, "far fa-star")}
-                onClick={e => handleFav(e)}></i>
-            )}
-            <Tooltip className={styles.tooltip}>
-              {fav ? "Remove from favorites" : "Add to favorites"}
-            </Tooltip>
-          </>
+          <span className={styles.icon}>
+            <Star item={item} />
+          </span>
 
           <img
             className={styles.image}

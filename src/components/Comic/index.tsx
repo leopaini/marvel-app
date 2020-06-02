@@ -1,4 +1,5 @@
 import React from "react";
+import Star from "../Star";
 import { useParams } from "react-router";
 import { getComicById } from "../../api";
 import { IComicProps, IComic, IThumbnail, ICreatorItem } from "../../interfaces";
@@ -37,7 +38,12 @@ const Comic: React.SFC<IComicProps> = () => {
       </div>
 
       <Description>
-        <h1 className={styles.title}>{comic.title}</h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>{comic.title}</h1>
+          <span className={styles.icon}>
+            <Star item={comic} />
+          </span>
+        </div>
 
         <ul className={styles.listMenu}>
           {published && (
