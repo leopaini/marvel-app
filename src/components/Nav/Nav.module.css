@@ -1,6 +1,7 @@
 .logo {
   height: 45px;
   cursor: pointer;
+  min-width: 100px;
   position: relative;
 }
 
@@ -39,6 +40,10 @@
   align-items: center;
 }
 
+.navMobile {
+  display: none;
+}
+
 .iconContent {
   position: relative;
 }
@@ -50,4 +55,63 @@
 .icon:hover+.tooltip {
   opacity: .9;
   transform: translateY(1.75em);
+}
+
+
+@media (max-width: 410px) {
+  .nav {
+    z-index: 12 !important;
+  }
+
+  .logoContainer {
+    width: 28px;
+    height: 45px;
+    overflow: hidden;
+    border-right: 3px solid #f0141e;
+  }
+
+  .navActions {
+    display: none;
+  }
+
+  .navMobile {
+    z-index: 99;
+    display: block;
+  }
+
+  .toggle .icon {
+    color: #A8A8A8;
+    font-size: 1.5em;
+  }
+
+  .listMenu {
+    left: 0;
+    top: 67px;
+    height: 0;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    position: absolute;
+    background: #fff;
+    transition: all ease-in-out 250ms;
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .listMenu.show {
+    height: 110px;
+  }
+
+  .listItem {
+    display: flex;
+    color: #333;
+    padding: 1em;
+    align-items: center;
+  }
+
+  .listItem i {
+    font-size: 1.25em;
+    padding-right: .5em;
+  }
 }

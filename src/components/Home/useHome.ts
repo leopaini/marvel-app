@@ -44,8 +44,10 @@ const useHome = () => {
             api
               .getCharacterByComicId(comic.id, character)
               .then((results: ICharacter[]) => {
-                setFilters(comic, filters, results[0].id);
-                setItems(results);
+                if (results.length) {
+                  setFilters(comic, filters, results[0].id);
+                  setItems(results);
+                }
               })
               .finally(() => setLoading(false));
           })

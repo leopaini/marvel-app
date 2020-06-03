@@ -3,7 +3,7 @@
   min-height: 100vh;
   box-sizing: border-box;
   padding: 8em 4.5em 4.5em;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: minmax(300px, 1fr) 1fr;
   grid-template-areas: "contentImg description";
 }
 
@@ -53,4 +53,18 @@
   font-weight: 500;
   padding-top: 2em;
   font-size: 1.125rem;
+}
+
+
+@media (max-width: 700px) {
+  .comic {
+    grid-template-columns: 1fr;
+    grid-template-areas: "contentImg"
+      "description";
+    padding: 6em 1.5em;
+  }
+
+  .description {
+    padding: 1.5em 0 !important;
+  }
 }

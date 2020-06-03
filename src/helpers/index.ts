@@ -2,7 +2,7 @@ import { ICharacter, IComic } from "../interfaces";
 
 export const processComicsParams = (cParams: string) => {
   const params = decodeURIComponent(cParams).split("|");
-  const firstTitle = params[0];
+  const firstTitle = params.shift()!;
 
   const title = firstTitle.slice(0, firstTitle.indexOf("(") - 1);
   let [year, issueNumber] = firstTitle.slice(firstTitle.indexOf("(")).split(" ");
@@ -10,6 +10,15 @@ export const processComicsParams = (cParams: string) => {
   issueNumber = issueNumber.replace("#", "");
 
   return { title, year, issueNumber, filters: params };
+};
+
+export const getComicParams = (filter: string) => {
+  const title = filter.slice(0, filter.indexOf("(") - 1);
+  let [year, issueNumber] = filter.slice(filter.indexOf("(")).split(" ");
+  year = year.replace("(", "").replace(")", "");
+  issueNumber = issueNumber.replace("#", "");
+
+  return { title, year, issueNumber };
 };
 
 export const hideScroll = (): void => {

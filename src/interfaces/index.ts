@@ -43,6 +43,12 @@ export interface IProviderProps {
 }
 
 // Services API
+export interface IComicParams {
+  title: string;
+  year: string;
+  issueNumber: string;
+}
+
 export interface IResponse<T> {
   config: object;
   headers: object;

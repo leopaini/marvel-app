@@ -37,7 +37,7 @@ const Comic: React.SFC<IComicProps> = () => {
         <img src={getPath(comic.thumbnail)} alt={comic.title} />
       </div>
 
-      <Description>
+      <Description className={styles.description}>
         <div className={styles.header}>
           <h1 className={styles.title}>{comic.title}</h1>
           <span className={styles.icon}>

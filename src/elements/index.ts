@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const Container = styled.main`
   margin: 0 auto;
   max-width: 1280px;
+`;
+
+export const Body = styled.body`
   transition: background-color linear 150ms;
   background-color: ${props => props.theme.color.background};
 `;

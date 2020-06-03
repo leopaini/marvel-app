@@ -13,6 +13,7 @@ const useNav = (setTheme: ThemeAction) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [search, setSearch] = React.useState("");
+  const [showMenu, setShowMenu] = React.useState(false);
   const themeContext = React.useContext(ThemeContext);
   const favPage = location.pathname === "/favorites";
 
@@ -22,11 +23,13 @@ const useNav = (setTheme: ThemeAction) => {
 
   const handleFav = (): void => {
     history.push("/favorites");
+    setShowMenu(false);
   };
 
   const handleClick = (): void => {
     if (themeContext.id === ThemeType.light) setTheme(themeDark);
     else setTheme(themeLight);
+    setShowMenu(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -49,6 +52,10 @@ const useNav = (setTheme: ThemeAction) => {
       getCharactersByName(search)
         .then((results: ICharacter[]) => setItems(results))
         .finally(() => setLoading(false));
+  };
+
+  const handleMobile = (): void => {
+    setShowMenu(!showMenu);
   };
 
   // Dispatch actions
@@ -88,11 +95,13 @@ const useNav = (setTheme: ThemeAction) => {
   return {
     search,
     favPage,
+    showMenu,
     handleFav,
     handleHome,
     handleClick,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    handleMobile
   };
 };
 

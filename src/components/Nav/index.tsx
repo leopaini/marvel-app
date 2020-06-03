@@ -13,16 +13,20 @@ const Nav: React.SFC<INavProps> = ({ setTheme }) => {
   const {
     search,
     favPage,
+    showMenu,
     handleFav,
     handleHome,
     handleSubmit,
     handleChange,
-    handleClick
+    handleClick,
+    handleMobile
   } = useNav(setTheme);
 
   return (
-    <NavBar>
-      <Logo className={styles.logo} onClick={handleHome} />
+    <NavBar className={styles.nav}>
+      <div className={styles.logoContainer}>
+        <Logo className={styles.logo} onClick={handleHome} />
+      </div>
 
       <form className={styles.search} onSubmit={handleSubmit}>
         <Input value={search} placeholder="Search" onChange={handleChange} />
@@ -42,6 +46,22 @@ const Nav: React.SFC<INavProps> = ({ setTheme }) => {
           <Icon className={cx(styles.icon, "fas fa-cog")} onClick={handleClick} />
           <Tooltip className={styles.tooltip}>Change the Theme</Tooltip>
         </span>
+      </div>
+
+      <div className={styles.navMobile}>
+        <span className={styles.toggle}>
+          <i className={cx(styles.icon, "fas fa-bars")} onClick={handleMobile}></i>
+        </span>
+        <ul className={cx(styles.listMenu, showMenu ? styles.show : "")}>
+          <li className={styles.listItem} onClick={handleFav}>
+            <i className="fas fa-star"></i>
+            <span>Go to Favorites</span>
+          </li>
+          <li className={styles.listItem} onClick={handleClick}>
+            <i className="fas fa-cog"></i>
+            <span>Change the Theme</span>
+          </li>
+        </ul>
       </div>
     </NavBar>
   );

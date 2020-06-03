@@ -1,6 +1,5 @@
 import React from "react";
 import { Star } from "../";
-import cx from "classnames";
 import useModal from "./useModal";
 import { isCharacter } from "../../helpers";
 import { IModalProps, IComic } from "../../interfaces";

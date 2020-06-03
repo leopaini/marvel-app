@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { StoreProvider } from "../store";
 
 // Styled Components
+import { Body } from "../elements";
 import { ThemeProvider } from "styled-components";
 
 // Components
@@ -19,15 +20,17 @@ const Router: React.SFC<IRouterProps> = () => {
     <StoreProvider>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <Nav setTheme={handleTheme} />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/comic/:comicId" component={Comic} />
-            <Route path="/favorites" component={Favorites} />
-            <Route path="/*">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
+          <Body>
+            <Nav setTheme={handleTheme} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/comic/:comicId" component={Comic} />
+              <Route path="/favorites" component={Favorites} />
+              <Route path="/*">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </Body>
         </ThemeProvider>
       </BrowserRouter>
     </StoreProvider>

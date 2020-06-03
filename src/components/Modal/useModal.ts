@@ -4,8 +4,8 @@ import styles from "./Modal.module.css";
 import { useHistory } from "react-router";
 import { showScroll } from "../../helpers";
 import React, { useCallback } from "react";
-import { getComicByCharId } from "../../api";
-import { ICharacter, IComic, IThumbnail } from "../../interfaces";
+import { ICharacter, IComic, IThumbnail, IResponse } from "../../interfaces";
+import { getComicByCharId, getAllComicsByFilters } from "../../api";
 
 const useModal = (item: ICharacter | IComic) => {
   const history = useHistory();
@@ -30,21 +30,42 @@ const useModal = (item: ICharacter | IComic) => {
     [dispatch]
   );
 
+  const setFilters = useCallback(
+    (characterId: number, comics: IComic[]) => {
+      dispatch({ type: "ADD_FILTER_COMICS", payload: { characterId, comics } });
+    },
+    [dispatch]
+  );
+
+  // Case more than one comic in url query string.
+  const checkFilters = useCallback(async () => {
+    const favs = state.filters[item.id];
+    if (favs.filters.length + 1 !== favs.comics.length) {
+      getAllComicsByFilters(favs.filters)
+        .then((response: IResponse<IComic>[]) => {
+          const comics = response.map((el: IResponse<IComic>) => el.data.data.results[0]);
+          setFilters(item.id, comics);
+        })
+        .finally(() => setLoading(false));
+    } else setLoading(false);
+  }, [item.id, setFilters, state.filters]);
+
   const handleClick = (id: number): void => {
     showScroll();
     history.push(`/comic/${id}`);
   };
 
   React.useEffect(() => {
-    if (state.filters[item.id] || state.comics[item.id]) {
-      setLoading(false);
+    if (state.comics[item.id] || state.filters[item.id]) {
+      if (state.filters[item.id]) checkFilters();
+      else setLoading(false);
     } else {
       getComicByCharId(item.id).then((result: IComic[]) => {
         setComics(item.id, result);
         setLoading(false);
       });
     }
-  }, [item, setComics, state.comics, state.filters]);
+  }, [checkFilters, item, setComics, state.comics, state.filters]);
 
   return {
     items,

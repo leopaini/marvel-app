@@ -1,6 +1,7 @@
 import axios from "axios";
 import CryptoJS from "crypto-js";
-import { IResponse, ICharacter, IComic } from "../interfaces";
+import { getComicParams } from "../helpers";
+import { IResponse, ICharacter, IComic, IComicParams } from "../interfaces";
 
 const ts = Date.now();
 const apikey = "b1ef90dfe32b98ef73ec0b80881e0cde";
@@ -101,6 +102,27 @@ export const getComics = async (comic: string): Promise<IComic[]> => {
   }
 };
 
+export const getAllComicsByFilters = async (filters: string[]) => {
+  try {
+    const requests: any[] = [];
+    filters.forEach((filter: string) => {
+      const params: IComicParams = getComicParams(filter);
+      requests.push(getInstanceWithFilters(params));
+    });
+
+    return await axios.all(requests);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const getInstanceWithFilters = (params: IComicParams) => {
+  const { title: titleStartsWith, year: startYear, issueNumber } = params;
+  return instance.get("comics", {
+    params: { titleStartsWith, startYear, issueNumber, ts, apikey, hash }
+  });
+};
+
 const api = {
   getComics,
   getComicById,
@@ -108,7 +130,8 @@ const api = {
   getComicByCharId,
   getRandomCharacter,
   getCharactersByName,
-  getCharacterByComicId
+  getCharacterByComicId,
+  getAllComicsByFilters
 };
 
 export default api;

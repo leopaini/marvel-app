@@ -48,6 +48,13 @@ type Action =
         filters: string[];
         characterId: number;
       };
+    }
+  | {
+      type: "ADD_FILTER_COMICS";
+      payload: {
+        comics: IComic[];
+        characterId: number;
+      };
     };
 
 export default Action;

@@ -51,6 +51,13 @@ function reducers(state: IState, action: Action) {
       return { ...state, filters };
     }
 
+    case "ADD_FILTER_COMICS": {
+      const filters = { ...state.filters };
+      const filter = filters[action.payload.characterId];
+      filter.comics = [...filter.comics, ...action.payload.comics];
+      return { ...state, filters };
+    }
+
     case "SET_SEARCH": {
       return { ...state, results: 0 };
     }
