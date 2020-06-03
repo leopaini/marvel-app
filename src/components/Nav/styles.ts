@@ -6,11 +6,8 @@ export const NavBar = styled.nav`
   right: 0;
   z-index: 1;
   height: 66px;
-  display: flex;
   padding: 0 1em;
   position: absolute;
-  align-items: center;
-  justify-content: flex-start;
   background-color: ${props => props.theme.color.navbar};
   box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.2);
 `;

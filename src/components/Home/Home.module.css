@@ -16,7 +16,6 @@
   display: inline-flex;
   margin: -2em 0 0 -2em;
   width: calc(100% + 2em);
-  justify-content: space-around;
 }
 
 .cards>* {
@@ -29,7 +28,7 @@
   flex-direction: column;
 }
 
-@media (max-width: 410px) {
+@media (max-width: 415px) {
   .home {
     padding: 5em 2em;
   }
